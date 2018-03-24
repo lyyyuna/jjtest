@@ -18,5 +18,6 @@
     <mappers>
         <mapper resource="Student.xml"/>
         <mapper resource="Student1.xml" />
+        <mapper resource="BlogMapper.xml" />
     </mappers>
 </configuration>

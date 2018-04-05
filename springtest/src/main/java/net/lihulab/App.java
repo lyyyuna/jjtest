@@ -1,5 +1,7 @@
 package net.lihulab;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * Hello world!
  *
@@ -8,6 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring_ioc.xml");
+        OneInterface oneInterface = (OneInterface)context.getBean("oneInterface");
+        oneInterface.say("hello");
     }
 }

@@ -42,7 +42,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>net.lihulab.Application</mainClass>
+                    <mainClass>net.lihulab.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>

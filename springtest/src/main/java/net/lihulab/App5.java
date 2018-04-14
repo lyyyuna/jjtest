@@ -12,5 +12,6 @@ public class App5 {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-aop-schema-advisor.xml");
         AspectBiz biz = (AspectBiz)context.getBean("aspectBiz");
         biz.biz();
+        biz.init("lalala", 9);
     }
 }

@@ -22,14 +22,18 @@
 <!-- 			<aop:around method="aroundInit" pointcut="execution(* com.imooc.aop.schema.advice.biz.AspectBiz.init(String, int))  -->
 <!-- 							and args(bizName, times)"/> -->
         <aop:aspect id="lihuAspectAOP" ref="lihuAspect">
-            <aop:pointcut expression="execution(* net.lihulab.aop.schema.biz.*Biz.*(..))" id="lihuPointcut" />
+<!--             <aop:pointcut expression="execution(* net.lihulab.aop.schema.biz.*Biz.*(..))" id="lihuPointcut" />
             <aop:before method="before" pointcut-ref="lihuPointcut" />
             <aop:after-returning method="afterReturning" pointcut-ref="lihuPointcut"/>
             <aop:after-throwing method="afterThrowing" pointcut-ref="lihuPointcut"/>
             <aop:after method="after" pointcut-ref="lihuPointcut"/>
             <aop:around method="around" pointcut-ref="lihuPointcut"/>
             <aop:around method="aroundInit" pointcut="execution(* net.lihulab.aop.schema.biz.AspectBiz.init(String, int))
-							and args(bizName, times)"/>
+							and args(bizName, times)"/> -->
+
+            <aop:declare-parents types-matching="net.lihulab.aop.schema.biz.AspectBiz"
+                            implement-interface="net.lihulab.aop.schema.FitInte"
+                            default-impl="net.lihulab.aop.schema.FitImpl"/>
 		</aop:aspect>
 	</aop:config>
 

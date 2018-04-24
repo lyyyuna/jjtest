@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="lihuBeforeAdvice" class="net.lihulab.aop.api.LihuBeforeAdvice"></bean>
+	<bean id="lihuAfterReturningAdvice" class="net.lihulab.aop.api.LihuAfterReturningAdvice"></bean>
+	<bean id="lihuMethodInterceptor" class="net.lihulab.aop.api.LihuMethodInterceptor"></bean>
+	<bean id="lihuMethodThrowAdvice" class="net.lihulab.aop.api.LihuMethodInterceptor"></bean>
+
+	<bean id="baseProxyBean" class="org.springframework.aop.framework.ProxyFactoryBean" 
+			lazy-init="true" abstract="true"></bean>
+	
+	<bean id="bizLogicImpl"  parent="baseProxyBean">
+		<property name="target">
+			<bean class="net.lihulab.aop.api.BizLogicImpl"></bean>
+		</property>
+		<property name="proxyInterfaces">
+			<value>net.lihulab.aop.api.BizLogic</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>lihuBeforeAdvice</value>
+				<value>lihuAfterReturningAdvice</value>
+				<value>lihuMethodInterceptor</value>
+				<value>lihuMethodThrowAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+ </beans>

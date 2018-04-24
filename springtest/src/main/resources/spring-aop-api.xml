@@ -13,7 +13,7 @@
 	<bean id="lihuBeforeAdvice" class="net.lihulab.aop.api.LihuBeforeAdvice"></bean>
 	<bean id="lihuAfterReturningAdvice" class="net.lihulab.aop.api.LihuAfterReturningAdvice"></bean>
 	<bean id="lihuMethodInterceptor" class="net.lihulab.aop.api.LihuMethodInterceptor"></bean>
-	<bean id="lihuMethodThrowAdvice" class="net.lihulab.aop.api.LihuMethodInterceptor"></bean>
+	<bean id="lihuMethodThrowAdvice" class="net.lihulab.aop.api.LihuMethodThrowAdvice"></bean>
 
 	<bean id="baseProxyBean" class="org.springframework.aop.framework.ProxyFactoryBean" 
 			lazy-init="true" abstract="true"></bean>

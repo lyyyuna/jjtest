@@ -64,7 +64,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>net.lihulab.App8</mainClass>
+                    <mainClass>net.lihulab.App9</mainClass>
                 </configuration>
             </plugin>
         </plugins>

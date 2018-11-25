@@ -20,10 +20,19 @@ public class AppTest
     @Autowired
     private CompactDisc cd;
 
+    @Autowired
+    private MediaPlayer mp;
+
     @Test
     public void shouldAnswerWithTrue()
     {
 
         assertNotNull(cd);
+        cd.play();
+    }
+
+    @Test
+    public void play() {
+        mp.play();
     }
 }

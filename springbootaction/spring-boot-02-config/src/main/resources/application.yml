@@ -1,0 +1,18 @@
+server:
+  port: 9000
+
+
+person:
+  lastName: hu
+  age: 11
+  boss: true
+  maps: {k1: v1, k2:12}
+  lists:
+    - lisi
+    - zhangsean
+  dog:
+    name: fdhui
+    age: 15
+
+
+

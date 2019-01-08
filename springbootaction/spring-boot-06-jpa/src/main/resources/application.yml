@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    username: yiyangli
+    password:
+    url: jdbc:postgresql://127.0.0.1/jjtest
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+    #更新或创建
+      ddl-auto: update
+    show-sql: true

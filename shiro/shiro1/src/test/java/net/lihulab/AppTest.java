@@ -9,6 +9,7 @@ import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -16,6 +17,18 @@ import org.junit.Test;
  */
 public class AppTest 
 {
+    private void login(String configFile, String username, String password) {
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory(configFile);
+
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+
+        subject.login(token);
+    }
+
     /**
      * Rigorous Test :-)
      */
@@ -39,5 +52,29 @@ public class AppTest
 
         System.out.println(subject.isAuthenticated());
 
+    }
+
+    @Test
+    public void testRealm() {
+        Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro-realm.ini");
+        SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken("zhang", "1234");
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(subject.isAuthenticated());
+    }
+
+    @Test
+    public void testIsPermitted() {
+        login("classpath:shiro-roles.ini", "wang", "123");
+        Assert.assertTrue(SecurityUtils.getSubject().isPermitted("user:create"));
+        Assert.assertFalse(SecurityUtils.getSubject().isPermitted("user:delete"));
+        Assert.assertTrue(SecurityUtils.getSubject().isPermitted("user:create:*"));
     }
 }

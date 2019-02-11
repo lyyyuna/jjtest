@@ -29,6 +29,11 @@ public class AppTest
         subject.login(token);
     }
 
+    @Test
+    public void testPasswordService(){
+        login("classpath:shiro-passwordservice.ini", "wu", "123");
+    }
+
     /**
      * Rigorous Test :-)
      */

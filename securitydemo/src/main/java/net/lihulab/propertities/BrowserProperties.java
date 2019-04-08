@@ -2,6 +2,15 @@ package net.lihulab.propertities;
 
 public class BrowserProperties {
     private String loginPage;
+    private int rememberMeSeconds = 3600;
+
+    public int getRememberMeSeconds() {
+        return rememberMeSeconds;
+    }
+
+    public void setRememberMeSeconds(int rememberMeSeconds) {
+        this.rememberMeSeconds = rememberMeSeconds;
+    }
 
     public LoginType getLoginType() {
         return loginType;

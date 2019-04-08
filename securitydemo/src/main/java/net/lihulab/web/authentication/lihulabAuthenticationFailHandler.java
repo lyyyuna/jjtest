@@ -3,6 +3,7 @@ package net.lihulab.web.authentication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.lihulab.propertities.LoginType;
 import net.lihulab.propertities.SecurityProperties;
+import net.lihulab.web.support.SimpleResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,8 @@ public class lihulabAuthenticationFailHandler extends SimpleUrlAuthenticationFai
         if (LoginType.JSON.equals(properties.getBrowser().getLoginType())) {
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(e));
+            response.getWriter().write(objectMapper.writeValueAsString(new SimpleResponse(e.getMessage()) ));
+            //logger.info("denglushibai");
         } else {
             super.onAuthenticationFailure(httpServletRequest, response, e);
         }

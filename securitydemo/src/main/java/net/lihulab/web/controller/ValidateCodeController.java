@@ -1,10 +1,12 @@
 package net.lihulab.web.controller;
 
+import net.lihulab.core.image.SmsCode;
 import net.lihulab.propertities.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import net.lihulab.core.image.ImageCode;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +25,8 @@ public class ValidateCodeController {
 
     public static final String SESSION_KEY = "SESSION_KEY_IMAGE_CODE";
 
+    public static final String SESSION_SMS_KEY = "SESSION_KEY_SMS_CODE";
+
     private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     @Autowired
@@ -33,6 +37,18 @@ public class ValidateCodeController {
         ImageCode imageCode = createImageCodde(new ServletWebRequest(request));
         sessionStrategy.setAttribute(new ServletWebRequest(request), SESSION_KEY, imageCode);
         ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
+    }
+
+    @GetMapping("/code/sms")
+    public void createSmsCode(HttpServletRequest request, HttpServletResponse response) throws ServletRequestBindingException {
+        SmsCode smsCode = createSmsCode();
+        sessionStrategy.setAttribute(new ServletWebRequest(request), SESSION_SMS_KEY, smsCode);
+        String mobile = ServletRequestUtils.getRequiredStringParameter(request, "mobile");
+        System.out.println("手机号为：" + mobile + " 验证码为 " + smsCode.getCode());
+    }
+
+    public SmsCode createSmsCode() {
+        return new SmsCode("123", securityProperties.getCode().getImage().getExpireIn());
     }
 
     private ImageCode createImageCodde(ServletWebRequest request) {
